@@ -1,0 +1,45 @@
+<ul id="nav">
+  <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+
+  <li class="mainmenu"><a  (click)="ismenuopen()"><mat-icon>more_vert</mat-icon><span style="padding-left: 20px;">Menu</span></a>
+
+      <ul *ngIf="menuopen" class="item">
+
+          <li ><a  (click)="viewform()">add item <mat-icon class="icon">add</mat-icon></a></li>
+            <app-form    *ngIf="view" ></app-form>
+            <div cdkDropList class="item-list" (cdkDropListDropped)="drop($event)">
+          <li class="item-box" *ngFor="let item of items" cdkDrag><a >{{item.name}}
+            <mat-icon  class="icon" (click)="deleteitem(item)">delete</mat-icon>
+            <mat-icon  class="icon" (click)="editselecteditem(item)" >edit</mat-icon>
+            <mat-icon class="icon" (click)="addselecteditem(item.id)">add</mat-icon></a>
+
+
+
+           <app-editform *ngIf="item==selecteditem && editview" [selecteditem]="selecteditem" ></app-editform>
+              <ul class="subitem">
+<li><a *ngIf="item.id==selecteditemid && subview">add sub item<mat-icon class="icon">add</mat-icon></a></li>
+                <app-form  *ngIf="item.id==selecteditemid && subview" [selecteditemid]="selecteditemid"></app-form>
+            <div cdkDropList class="item-list" (cdkDropListDropped)="dropsubitem($event,item)">
+
+                <li class="item-box" *ngFor="let subitem of item.subitems" cdkDrag><a >{{subitem.name}}
+                  <mat-icon class="icon" (click)="deletesubitem(item,subitem)">delete</mat-icon>
+                    <mat-icon class="icon" (click)="editselectedsubitem(subitem)">edit</mat-icon>
+                    </a>
+           <app-editform *ngIf="subitem==selectedsubitem && editsubview" [selectedsubitem]="selectedsubitem"  ></app-editform>
+          </div>
+          </ul>
+
+              </li>
+            </div>
+      </ul>
+      </li>
+</div>
+</ul>
+
+
+
+
+
+
+
+

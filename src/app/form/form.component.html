@@ -1,0 +1,13 @@
+
+  <form  class="form"  [formGroup]="itemForm"  (ngSubmit)="onSubmit()" >
+    <div class="form-group" >
+    <input placeholder="Name" class="finput frmEl" formControlName="name" >
+  <span class="text-danger" *ngIf="itemForm.controls['name'].touched && itemForm.hasError('required','name')">Please enter a Name</span>
+  </div>
+  <div class="form-group" >
+    <input placeholder="Link" class="finput frmEl" formControlName="link" >
+    <span class="text-danger" *ngIf="itemForm.controls['link'].touched && itemForm.hasError('required','link')">Please enter a Link</span>
+    </div>
+    <button class="submitBtn frmEl" type="submit" [disabled]="!itemForm.valid" >Add</button>
+
+  </form>
